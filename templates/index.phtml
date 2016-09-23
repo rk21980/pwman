@@ -12,7 +12,7 @@
                 <input type="hidden" name="secret" value="<?=$this->secret?>" />
             </form>
         <?php elseif(property_exists($this, "qrcode")): ?>
-            <?=$this->qrcode?>
+            <img src="<?=$this->qrcode?>" name="qrcode" />
         <?php else: ?>
             <p>I got nothing on this</p>
     <?php endif; ?>
