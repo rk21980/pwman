@@ -1,4 +1,4 @@
 RewriteEngine on
-RewriteCond %{REQUEST_URI} !^/index.php$
+RewriteCond %{REQUEST_URI} !^/pwman/index.php$
 RewriteCond %{REQUEST_URI} !\.(gif|jpe?g|png|css|js)$
 RewriteRule .* /pwman/index.php [L,R=302]
