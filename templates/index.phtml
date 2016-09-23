@@ -5,24 +5,17 @@
 </head>
 <body>
 <section>
-    <?php
-        echo get_class($this);
-    var_dump($this->qrcode);
-        if(property_exists($this, "secret")): ?>
+    <?php if(property_exists($this, "secret")): ?>
             <form method="post" action="">
                 <input type="text" name="login" placeholder="name" />
                 <input type="password" name="login" placeholder="password" />
                 <input type="hidden" name="secret" value="<?=$this->secret?>" />
             </form>
-        <?php
-        elseif(property_exists($this, "qrcode")):
-            echo $this->qrcode;
-        else:
-        ?>
+        <?php elseif(property_exists($this, "qrcode")): ?>
+            <?=$this->qrcode?>
+        <?php else: ?>
             <p>I got nothing on this</p>
-        <?php
-        endif;
-    ?>
+    <?php endif; ?>
 </section>
 </body>
 </html>
