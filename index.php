@@ -10,6 +10,7 @@ class PWMan {
     {
         $ga = new PHPGangsta_GoogleAuthenticator();
         $secret = $ga->createSecret();
+        echo $ga->getQRCodeGoogleUrl('PWMan', $secret);
         $t = new PWMan_View();
         $t->qrcode = $ga->getQRCodeGoogleUrl('PWMan', $secret);
         $t->friends = array(
