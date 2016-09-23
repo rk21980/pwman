@@ -52,3 +52,6 @@
 
 # Mac
 /.DS_Store
+
+# Tests
+/tests/*
