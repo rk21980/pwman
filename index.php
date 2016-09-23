@@ -8,7 +8,10 @@ class PWMan {
 
     public function run()
     {
+        $ga = new PHPGangsta_GoogleAuthenticator();
+        $secret = $ga->createSecret();
         $t = new PWMan_View();
+        $t->qrcode = $ga->getQRCodeGoogleUrl('PWMan', $secret);
         $t->friends = array(
             'Rachel', 'Phoebe', 'Chandler', 'Joey', 'Ross'
         );
