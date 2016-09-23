@@ -6,7 +6,7 @@
 <body>
 <section>
     <?php
-        get_class($this);
+        echo get_class($this);
         if(property_exists($this, "secret")): ?>
             <form method="post" action="">
                 <input type="text" name="login" placeholder="name" />
