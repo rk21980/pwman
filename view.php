@@ -1,5 +1,5 @@
 <?php
-class MyView {
+class PWMan_View {
     protected $template_dir = 'templates/';
     protected $vars = array();
     public function __construct($template_dir = null) {

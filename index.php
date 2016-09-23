@@ -3,11 +3,12 @@ class PWMan {
     public function __construct()
     {
         include_once('view.php');
+        require_once 'authenticator.php';
     }
 
     public function run()
     {
-        $t = new MyView();
+        $t = new PWMan_View();
         $t->friends = array(
             'Rachel', 'Phoebe', 'Chandler', 'Joey', 'Ross'
         );
@@ -15,5 +16,5 @@ class PWMan {
     }
 }
 
-$pwman = new PWMan;
+$pwman = new PWMan();
 $pwman->run();
