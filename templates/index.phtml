@@ -1,24 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <script type="text/javascript" src="js/core.js"></script>
-</head>
-<body>
 <section>
-    <?php var_dump($this); ?>
-    <?php var_dump(isset($this->qrcode)); ?>
-    <?php var_dump(property_exists(get_class($this), "qrcode")); ?>
-    <?php if(property_exists($this, "secret")): ?>
-            <form method="post" action="">
-                <input type="text" name="login" placeholder="name" />
-                <input type="password" name="login" placeholder="password" />
-                <input type="hidden" name="secret" value="<?=$this->secret?>" />
-            </form>
-        <?php elseif(!empty($this->qrcode)): ?>
-            <img src="<?=$this->qrcode?>" name="qrcode" />
-        <?php else: ?>
-            <p>I got nothing on this</p>
-    <?php endif; ?>
+
+    <a href="/register.php">register</a>
 </section>
-</body>
-</html>

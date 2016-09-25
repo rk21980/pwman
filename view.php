@@ -9,11 +9,13 @@ class PWMan_View {
         }
     }
     public function render($template_file) {
+        include $this->template_dir."header.phtml";
         if (file_exists($this->template_dir.$template_file)) {
             include $this->template_dir.$template_file;
         } else {
             throw new Exception('no template file ' . $template_file . ' present in directory ' . $this->template_dir);
         }
+        include $this->template_dir."footer.phtml";
     }
     public function __set($name, $value) {
         $this->vars[$name] = $value;
