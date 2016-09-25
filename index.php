@@ -16,7 +16,7 @@ class PWMan {
         $t->friends = array(
             'Rachel', 'Phoebe', 'Chandler', 'Joey', 'Ross'
         );
-        $t->render('index.phtml');
+        $t->render('login.phtml');
     }
 }
 
