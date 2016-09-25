@@ -5,6 +5,7 @@
 </head>
 <body>
 <section>
+    <?php var_dump($this); ?>
     <?php var_dump(property_exists($this, "qrcode")); ?>
     <?php if(property_exists($this, "secret")): ?>
             <form method="post" action="">
