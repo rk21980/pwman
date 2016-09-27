@@ -13,6 +13,7 @@ function call($controller, $action) {
     switch($controller) {
         case 'pages':
             $controller = new PagesController();
+            get_class($controller);
             break;
     }
 
