@@ -5,6 +5,10 @@
  * Date: 27/09/2016
  * Time: 19:16
  */
+
+ini_set("display_errors",1);
+error_reporting(E_ALL);
+
 require_once ('connection.php');
 
 if( isset($_GET['controller']) && isset($_GET['action'])) {

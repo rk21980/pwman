@@ -5,8 +5,6 @@
  * Date: 27/09/2016
  * Time: 19:36
  */
-ini_set("display_errors",1);
-error_reporting(E_ALL);
 
 function call($controller, $action) {
     require_once ('controllers/' . $controller . '_controller.php');
