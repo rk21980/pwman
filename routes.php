@@ -10,8 +10,8 @@ ini_set("display_errors",1);
 error_reporting(E_ALL);
 
 function call($controller, $action) {
-    echo getcwd().'/controllers/' . $controller . '_controller.php';
-    require_once (getcwd().'/controllers/' . $controller . '_controller.php');
+    echo 'controllers/' . $controller . '_controller.php';
+    require_once ('controllers/' . $controller . '_controller.php');
 
     switch($controller) {
         case 'pages':
