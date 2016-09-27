@@ -6,7 +6,6 @@
  * Date: 27/09/2016
  * Time: 19:17
  */
-echo __FILE__;
 class Db
 {
 

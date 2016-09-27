@@ -6,7 +6,6 @@
  * Time: 19:32
  */
 ?>
-<?php echo __FILE__; ?>
 <DOCTYPE html>
     <html>
     <head>
