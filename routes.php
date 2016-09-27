@@ -5,6 +5,8 @@
  * Date: 27/09/2016
  * Time: 19:36
  */
+echo __FILE__;
+
 function call($controller, $action) {
     require_once ('controllers/' . $controller . '_controller.php');
 

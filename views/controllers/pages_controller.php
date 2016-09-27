@@ -5,6 +5,7 @@
  * Date: 27/09/2016
  * Time: 19:43
  */
+echo __FILE__;
 class PagesController {
     public function home() {
         $first_name = 'Jon';
