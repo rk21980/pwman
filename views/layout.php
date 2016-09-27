@@ -19,7 +19,7 @@
         <?php require_once('routes.php'); ?>
 
         <footer>
-            ©<?php echo date('Y'); ?> rk21980
+            <p>©<?php echo date('Y'); ?><br><small>rk21980</small></p>
         </footer>
     </body>
     </html>
