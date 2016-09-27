@@ -16,12 +16,16 @@ function call($controller, $action) {
             $controller = new PagesController();
             get_class($controller);
             break;
+        case 'posts':
+            require_once('models/post.php');
+            $controller = new PostsController();
     }
 
     $controller->{ $action }();
 }
 
-$controllers = array('pages' => ['home', 'error']);
+$controllers = array('pages' => ['home', 'error'],
+                     'posts' => ['index', 'show']);
 
 
 
