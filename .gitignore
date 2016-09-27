@@ -2,3 +2,6 @@
 .idea/*
 
 /Users/rob/NewSites/pwman/dynamics/*
+!.gitkeep
+.idea/
+dynamics/log/
