@@ -6,6 +6,8 @@
  * Time: 19:36
  */
 echo __FILE__;
+ini_set("display_errors",1);
+error_reporting(E_ALL);
 
 function call($controller, $action) {
     require_once ('controllers/' . $controller . '_controller.php');
