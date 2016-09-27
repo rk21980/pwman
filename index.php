@@ -1,24 +1,18 @@
 <?php
-class PWMan {
-    public function __construct()
-    {
-        include_once('view.php');
-        require_once 'authenticator.php';
-    }
+/**
+ * Created by PhpStorm.
+ * User: rob
+ * Date: 27/09/2016
+ * Time: 19:16
+ */
+require_once ('connection.php');
 
-    public function run()
-    {
-        $ga = new PHPGangsta_GoogleAuthenticator();
-        $secret = $ga->createSecret();
-        //echo $ga->getQRCodeGoogleUrl('PWMan', $secret);
-        $t = new PWMan_View();
-        $t->qrcode = $ga->getQRCodeGoogleUrl('PWMan', $secret);
-        $t->friends = array(
-            'Rachel', 'Phoebe', 'Chandler', 'Joey', 'Ross'
-        );
-        $t->render('login.phtml');
-    }
+if( isset($_GET['controller']) && isset($_GET['action'])) {
+    $controller = $_GET['controller'];
+    $action = $_GET['action'];
+} else {
+    $controller = 'pages';
+    $action = 'home';
 }
 
-$pwman = new PWMan();
-$pwman->run();
+require_once('views/layout.php');
