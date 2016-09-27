@@ -5,7 +5,6 @@
  * Date: 27/09/2016
  * Time: 19:43
  */
-<?php
 class PagesController {
     public function home() {
         $first_name = 'Jon';
@@ -17,4 +16,3 @@ class PagesController {
         require_once('views/pages/error.php');
     }
 }
-?>

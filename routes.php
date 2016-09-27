@@ -6,7 +6,7 @@
  * Time: 19:36
  */
 function call($controller, $action) {
-    require_once 'controllers/' . $controller . '_controller.php');
+    require_once ('controllers/' . $controller . '_controller.php');
 
     switch($controller) {
         case 'pages':
