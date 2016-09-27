@@ -18,7 +18,7 @@ class Db
     public static function getInstance() {
         if( !isset(self::$instance)) {
             $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-            self::$instance = new PDO('mysql:host=localhost;db=robkanto1', 'pwmananger', 'Ch33s3cak3', $pdo_options);
+            self::$instance = new PDO('mysql:host=localhost;db=robkantor1', 'pwmanager@localhost', 'Ch33s3cak3', $pdo_options);
         }
         return self::$instance;
     }
