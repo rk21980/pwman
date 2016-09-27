@@ -26,6 +26,7 @@ echo "::".$controller."<br/>";
 
 if (array_key_exists($controller, $controllers)) {
     if (in_array($action, $controllers[$controller])) {
+        echo "calling $action";
         call($controller, $action);
     } else {
         call('pages', 'error');
