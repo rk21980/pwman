@@ -23,10 +23,10 @@ class Post
     public static function all() {
         $list = [];
         $db = Db::getInstance();
-        $req = $db->query('SELECT * FROM posts');
+        $posts = $db->query('SELECT * FROM posts');
 
         // we create a list of Post objects from the database results
-        foreach($req->fetchAll() as $post) {
+        foreach($posts as $post) {
             $list[] = new Post($post['id'], $post['author'], $post['content']);
         }
 
