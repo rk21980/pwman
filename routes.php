@@ -21,6 +21,9 @@ function call($controller, $action) {
 
 $controllers = array('pages' => ['home', 'error']);
 
+echo "::".$controller."<br/>";
+
+
 if (array_key_exists($controller, $controllers)) {
     if (in_array($action, $controllers[$controller])) {
         call($controller, $action);
