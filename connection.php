@@ -16,15 +16,6 @@ class Db
 
     private function __clone() {}
 
-    private function _getTables()
-    {
-        if(!self::$_tables){
-            $db = self::getInstance();
-            self::$_tables = $db->query("SHOW TABLES");
-        }
-        return self::$_tables;
-    }
-
     public static function getInstance() {
         if( !isset(self::$_instance)) {
             $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
@@ -37,12 +28,16 @@ class Db
         return self::$_instance;
     }
 
-    public function hasTable( $tableName = NULL )
+    public static function hasTable( $tableName = NULL )
     {
         if( !empty($tableName) ) {
-            $_tables = $this->_getTables();
-            var_dump($_tables);
+            $db = self::getInstance();
+            $_tables = $db->prepare("SHOW TABLES LIKE ':table'");
+            $_tables->execute(array(":table"=>$tableName));
+            if($_tables->columnCount())
+                return true;
         }
+        return false;
     }
 
 }
