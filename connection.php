@@ -34,6 +34,7 @@ class Db
             $db = self::getInstance();
             $_tables = $db->prepare("SHOW TABLES LIKE ':table'");
             $_tables->execute(array(":table"=>$tableName));
+            echo "CC: ".$_tables->columnCount();
             if($_tables->columnCount())
                 return true;
         }
