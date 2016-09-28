@@ -24,7 +24,7 @@ class Db
 
         $db = new mysqli('217.174.253.159', 'pwmanuser', 'Ch33s3cak3', 'robkantor1');
         if ($_error = $db->connect_errno) {
-            $result->error = $_error;
+            $result->error = $db->connect_error;
             return $result;
         }
 
