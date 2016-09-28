@@ -30,6 +30,7 @@ class Db
 
     public static function hasTable( $tableName = NULL )
     {
+        echo "table: ".$tableName;
         if( !empty($tableName) ) {
             if (empty(self::$_tables)) {
                 $db = self::getInstance();
