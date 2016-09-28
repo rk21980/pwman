@@ -9,23 +9,40 @@
 class Db
 {
 
-    private static $instance = NULL;
+    private static $_instance = NULL;
+    private static $_tables = NULL;
 
     private function __construct() {}
 
     private function __clone() {}
 
+    private function _getTables()
+    {
+        if(!self::$_tables){
+            $db = self::getInstance();
+            self::$_tables = $db->query("SHOW TABLES");
+        }
+        return self::$_tables;
+    }
+
     public static function getInstance() {
-        if( !isset(self::$instance)) {
+        if( !isset(self::$_instance)) {
             $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
             try {
-                self::$instance = new PDO('mysql:host=217.174.253.159;dbname=robkantor1', 'pwmanuser', 'Ch33s3cak3', $pdo_options);
-                //self::$instance = mysqli_connect( "217.174.253.159", "pwmanuser", 'Ch33s3cak3', "robkantor1" );
+                self::$_instance = new PDO('mysql:host=217.174.253.159;dbname=robkantor1', 'pwmanuser', 'Ch33s3cak3', $pdo_options);
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
             }
         }
-        return self::$instance;
+        return self::$_instance;
+    }
+
+    public function hasTable( $tableName = NULL )
+    {
+        if( !empty($tableName) ) {
+            $_tables = $this->_getTables();
+            var_dump($_tables);
+        }
     }
 
 }

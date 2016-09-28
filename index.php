@@ -9,8 +9,11 @@
 ini_set("display_errors",1);
 error_reporting(E_ALL);
 
+define("PW_DEBUG", true);
+
 require_once ('connection.php');
-require_once ('models/pwman.php');
+// core pieces
+require_once ('models/pwman.php'); // global helper / self-introducer
 
 if( isset($_GET['controller']) && isset($_GET['action'])) {
     $controller = $_GET['controller'];

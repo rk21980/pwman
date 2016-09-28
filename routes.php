@@ -6,7 +6,8 @@
  * Time: 19:36
  */
 
-function call($controller, $action) {
+function call($controller, $action)
+{
     require_once ('controllers/' . $controller . '_controller.php');
 
     //check if piece has already been installed
