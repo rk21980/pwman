@@ -14,19 +14,16 @@ class PWMan_Ground
 
     public function __construct()
     {
-        $db = Db::getInstance();
-
         var_dump(Db::hasTable(self::PIECE_TABLE));
 
         if(!Db::hasTable(self::PIECE_TABLE)) {
-            $_statement = $db->prepare("CREATE TABLE :table 
+            $_result = Db::query("CREATE TABLE ? 
                                       piece_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                                       name VARCHAR(255) NOT NULL,
-                                      status TINYINT(3) DEFAULT 0 COMMENT '0-disabled, 1-enabled'");
-            $_statement->execute(array(":table"=>self::PIECE_TABLE));
-
-            $_statement = $db->prepare("INSERT INTO :table (name, status) VALUES('pwman', 1)");
-            $_statement->execute(array(":table"=>self::PIECE_TABLE));
+                                      status TINYINT(3) DEFAULT 0 COMMENT '0-disabled, 1-enabled'", array("type"=>"s","value"=>self::PIECE_TABLE));
+            if($_result->count) {
+                Db::query("INSERT INTO ? (name, status) VALUES('pwman_ground', 1)", array("type"=>"s","value"=>self::PIECE_TABLE));
+            }
         }
         return $this;
     }
@@ -46,22 +43,20 @@ class PWMan_Ground
      * @param array $object
      * @return $this
      */
-    public function introduce($object)
+    public function introduce($piece)
     {
-        if(is_array($object) && count($object) && !empty($object["name"])) {
-            $db = Db::getInstance();
+        if(is_array($piece) && count($piece) && !empty($piece["name"])) {
             // check if installed
-            $_statement = $db->query("SELECT * FROM :table WHERE `name` = ':name'");
-            if (!($_result = $_statement->execute(array(":table" => self::PIECE_TABLE, ":name" => $object['name'])))) {
-                $package = new stdClass();
-                $package->msg = print_r($_statement->errorInfo(), true);
-                $this->pwlog($package);
-                return $this;
-            }
+            $_params = array(
+                array("type"=>"s","value"=>self::PIECE_TABLE),
+                array("type"=>"s","value"=>$piece['name'])
+            );
+            $_result = Db::query("SELECT * FROM ? WHERE name = ?", $_params);
+
             // install if not
-            if (!$_result->fetchColumn()) {
-                $_statement = $db->prepare("INSERT INTO :table (name, status) VALUES(':name', 1)");
-                $_statement->execute(array(":table" => self::PIECE_TABLE, ":name" => $object['name']));
+            if (!$_result->count) {
+                $_result = Db::query("INSERT INTO ? (name, status) VALUES(?, 1)", $_params);
+                var_dump($_result);
             }
         }
         return $this;

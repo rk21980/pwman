@@ -9,24 +9,48 @@
 class Db
 {
 
-    private static $_instance = NULL;
     private static $_tables;
 
     private function __construct() {}
 
     private function __clone() {}
 
-    public static function getInstance()
+    public static function query( $query, $data = NULL )
     {
-        if (!isset(self::$_instance)) {
-            $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-            try {
-                self::$_instance = new PDO('mysql:host=217.174.253.159;dbname=robkantor1', 'pwmanuser', 'Ch33s3cak3', $pdo_options);
-            } catch (PDOException $e) {
-                echo "Connection failed: " . $e->getMessage();
-            }
+        $result = new stdClass();
+        $result->count = 0;
+        $result->error = NULL;
+        $result->rows = NULL;
+
+        $db = new mysqli('217.174.253.159', 'pwmanuser', 'Ch33s3cak3', 'robkantor1');
+        if ($_error = $db->connect_errno) {
+            $result->error = $_error;
+            return $result;
         }
-        return self::$_instance;
+
+        $_stmt = $db->stmt_init();
+        if($_error = !$_stmt->prepare($query)){
+            $result->error = $_error;
+            return $result;
+        }
+        if(is_array($data)) {
+            $_paramTypes = "";
+            $_paramValues = [];
+            foreach($data as $_param) {
+                if(!(empty((string)$_param['type']) || empty($_param['value']))) {
+                    $_paramTypes .= (string)$_param['type'];
+                    $_paramValues[] = mysqli_real_escape_string($db, $_param['value']);
+                }
+            }
+            $_stmt->bind_param($_paramTypes, implode(",", $_paramValues));
+        }
+        $_stmt->execute();
+        $result->count = $_stmt->affected_rows;
+        $result->rows = $_stmt->get_result();
+        $_stmt->close();
+        $db->close();
+        return $result;
+
     }
 
     public static function hasTable( $tableName = NULL )
@@ -34,16 +58,11 @@ class Db
         echo "table: " . $tableName;
         if (!empty($tableName)) {
             if (empty(self::$_tables)) {
-                $db = self::getInstance();
-                $_tables = $db->prepare("SHOW TABLES LIKE ':table'");
-                $_tables->execute(array(":table" => $tableName));
-                self::$_tables = $_tables;
-                $_tables->errorInfo();
-                $_tables->debugDumpParams();
+                self::$_tables = self::query("SHOW TABLES LIKE ?", array(array("type"=>"s","value"=>$tableName)));
+                print_r(self::$_tables);
             }
-            echo "CC: " . self::$_tables->columnCount();
-            self::$_tables->fetchAll();
-            if (self::$_tables->columnCount())
+            echo "CC: " . self::$_tables->count;
+            if (self::$_tables->count)
                 return true;
         }
         return false;
