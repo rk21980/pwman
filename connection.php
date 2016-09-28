@@ -31,7 +31,7 @@ class Db
     public static function hasTable( $tableName = NULL )
     {
         if( !empty($tableName) ) {
-            if (empty(self::_tables)) {
+            if (empty(self::$_tables)) {
                 $db = self::getInstance();
                 $_tables = $db->prepare("SHOW TABLES LIKE ':table'");
                 $_tables->execute(array(":table" => $tableName));
