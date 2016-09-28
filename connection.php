@@ -10,7 +10,7 @@ class Db
 {
 
     private static $_instance = NULL;
-    private static $_tables = NULL;
+    private static $_tables;
 
     private function __construct() {}
 
@@ -31,11 +31,15 @@ class Db
     public static function hasTable( $tableName = NULL )
     {
         if( !empty($tableName) ) {
-            $db = self::getInstance();
-            $_tables = $db->prepare("SHOW TABLES LIKE ':table'");
-            $_tables->execute(array(":table"=>$tableName));
-            echo "CC: ".$_tables->columnCount();
-            if($_tables->columnCount())
+            if (empty(self::_tables)) {
+                $db = self::getInstance();
+                $_tables = $db->prepare("SHOW TABLES LIKE ':table'");
+                $_tables->execute(array(":table" => $tableName));
+                self::$_tables = $_tables;
+                echo "q: ".$_tables->queryString;
+            }
+            echo "CC: ".self::$_tables->columnCount();
+            if(self::$_tables->columnCount())
                 return true;
         }
         return false;
