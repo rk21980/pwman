@@ -10,6 +10,7 @@ class PWMan_Ground
 
     const PIECE_BOX_PATH = 'dynamics/pieces/';
     const PIECE_TABLE = 'pw_pieces';
+    const LOG_FILE = 'dynamics/log/pwground.log';
 
     public function __construct()
     {
