@@ -22,16 +22,16 @@ class Db
         $result->error = NULL;
         $result->rows = NULL;
 
-        $db = new mysqli('217.174.253.159', 'pwmanuser', 'Ch33s3cak3', 'robkantor1');
-        if ($_error = $db->connect_errno) {
-            $result->error = $db->connect_error;
+        $_db = new mysqli('217.174.253.159', 'pwmanuser', 'Ch33s3cak3', 'robkantor1');
+        if ($_error = $_db->connect_errno) {
+            $result->error = $_db->connect_error;
             return $result;
         }
 
-        $_stmt = $db->stmt_init();
+        $_stmt = $_db->stmt_init();
         if($_error = !$_stmt->prepare($query)){
             echo "<br>".__LINE__;
-            var_dump($_result);
+            var_dump($_error);
             $result->error = $_error;
             return $result;
         }
@@ -41,7 +41,7 @@ class Db
             foreach($data as $_param) {
                 if(!(empty($_param['type']) || empty($_param['value']))) {
                     $_paramTypes .= (string)$_param['type'];
-                    $_paramValues[] = mysqli_real_escape_string($db, $_param['value']);
+                    $_paramValues[] = mysqli_real_escape_string($_db, $_param['value']);
                 }
             }
             $_stmt->bind_param($_paramTypes, implode(",", $_paramValues));
@@ -50,7 +50,7 @@ class Db
         $result->count = $_stmt->affected_rows;
         $result->rows = $_stmt->get_result();
         $_stmt->close();
-        $db->close();
+        $_db->close();
         return $result;
 
     }
