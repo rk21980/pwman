@@ -40,7 +40,7 @@ class PWMan_Ground
 
 
     /**
-     * @param array $object
+     * @param $piece
      * @return $this
      */
     public function introduce($piece)
@@ -53,9 +53,13 @@ class PWMan_Ground
             );
             $_result = Db::query("SELECT * FROM ? WHERE name = ?", $_params);
 
+            echo "<br>".__LINE__;
+            var_dump($_result);
+
             // install if not
-            if (!$_result->count) {
+            if (!$_result->error && !$_result->count) {
                 $_result = Db::query("INSERT INTO ? (name, status) VALUES(?, 1)", $_params);
+                echo "<br>".__LINE__;
                 var_dump($_result);
             }
         }
