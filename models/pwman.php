@@ -15,6 +15,9 @@ class PWMan_Ground
     public function __construct()
     {
         $db = Db::getInstance();
+
+        var_dump(Db::hasTable(self::PIECE_TABLE));
+
         if(!Db::hasTable(self::PIECE_TABLE)) {
             $_statement = $db->prepare("CREATE TABLE :table 
                                       piece_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
