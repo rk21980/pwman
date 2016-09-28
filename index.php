@@ -15,6 +15,10 @@ require_once ('connection.php');
 // core pieces
 require_once ('models/pwman.php'); // global helper / self-introducer
 
+$package = new stdClass();
+$package->msg = "Started at ".microtime();
+$PWGround->pwlog($package);
+
 if( isset($_GET['controller']) && isset($_GET['action'])) {
     $controller = $_GET['controller'];
     $action = $_GET['action'];
