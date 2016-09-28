@@ -29,6 +29,8 @@ class Db
         }
 
         $_stmt = $_db->stmt_init();
+        echo "<br>".__LINE__;
+        var_dump($_stmt->prepare($query));
         if($_error = !$_stmt->prepare($query)){
             echo "<br>".__LINE__;
             var_dump($_error);
