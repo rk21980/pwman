@@ -63,4 +63,4 @@ class PWMan_Ground
         return $this;
     }
 }
-define("PWMan_Ground", new PWMan_Ground);
+$PWGround = new PWMan_Ground;
