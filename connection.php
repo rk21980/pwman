@@ -36,7 +36,7 @@ class Db
                 $_tables = $db->prepare("SHOW TABLES LIKE ':table'");
                 $_tables->execute(array(":table" => $tableName));
                 self::$_tables = $_tables;
-                echo "q: ".$_tables->queryString;
+                $_tables->debugDumpParams();
             }
             echo "CC: ".self::$_tables->columnCount();
             if(self::$_tables->columnCount())
