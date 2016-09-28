@@ -30,6 +30,8 @@ class Db
 
         $_stmt = $db->stmt_init();
         if($_error = !$_stmt->prepare($query)){
+            echo "<br>".__LINE__;
+            var_dump($_result);
             $result->error = $_error;
             return $result;
         }
