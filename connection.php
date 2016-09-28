@@ -37,7 +37,7 @@ class Db
             $_paramTypes = "";
             $_paramValues = [];
             foreach($data as $_param) {
-                if(!(empty((string)$_param['type']) || empty($_param['value']))) {
+                if(!(empty($_param['type']) || empty($_param['value']))) {
                     $_paramTypes .= (string)$_param['type'];
                     $_paramValues[] = mysqli_real_escape_string($db, $_param['value']);
                 }
