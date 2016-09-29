@@ -17,10 +17,11 @@ class PWMan_Ground
         var_dump(Db::hasTable(self::PIECE_TABLE));
 
         if(!Db::hasTable(self::PIECE_TABLE)) {
-            $_result = Db::query("CREATE TABLE ? 
+            $_result = Db::query("CREATE TABLE ? (
                                       piece_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                                       name VARCHAR(255) NOT NULL,
-                                      status TINYINT(3) DEFAULT 0 COMMENT '0-disabled, 1-enabled'", array("type"=>"s","value"=>self::PIECE_TABLE));
+                                      status TINYINT(3) DEFAULT 0 COMMENT '0-disabled, 1-enabled'
+                                 )", array("type"=>"s","value"=>self::PIECE_TABLE));
             if($_result->count) {
                 Db::query("INSERT INTO ? (name, status) VALUES('pwman_ground', 1)", array("type"=>"s","value"=>self::PIECE_TABLE));
             }
