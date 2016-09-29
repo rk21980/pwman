@@ -62,7 +62,7 @@ class Db
         echo "table: " . $tableName;
         if (!empty($tableName)) {
             if (empty(self::$_tables)) {
-                self::$_tables = self::query("SHOW TABLES LIKE ?", array(array("type"=>"s","value"=>$tableName)));
+                self::$_tables = self::query("SHOW TABLES LIKE '?'", array(array("type"=>"s","value"=>$tableName)));
                 print_r(self::$_tables);
             }
             echo "CC: " . self::$_tables->count;
