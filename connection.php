@@ -46,6 +46,8 @@ class Db
                     $_paramValues[] = mysqli_real_escape_string($_db, $_param['value']);
                 }
             }
+            echo "paramTypes:".$_paramTypes."<br/>";
+            echo "paramTypes:".implode(",", $_paramValues)."<br/>";
             $_stmt->bind_param($_paramTypes, implode(",", $_paramValues));
         }
         $_stmt->execute();
