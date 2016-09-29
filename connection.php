@@ -50,7 +50,7 @@ class Db
         }
         $_stmt->execute();
         $result->count = $_stmt->affected_rows;
-        $result->rows = $_stmt->get_result();
+        $result->rows = $_stmt->get_results();
         $_stmt->close();
         $_db->close();
         return $result;
